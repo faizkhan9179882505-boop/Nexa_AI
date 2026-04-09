@@ -4,7 +4,7 @@ import { MyContext } from "./MyContext";
 import { useContext, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 import { useAuth } from "./contexts/AuthContext.jsx";
-import api from "../api.js";
+import api from "./api.js";
 
 function ChatWindow() {
   const {
