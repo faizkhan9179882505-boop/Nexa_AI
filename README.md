@@ -52,7 +52,7 @@ FRONTEND_URL=https://your-frontend-domain.com
 ```
 
 ### Frontend Environment Variables
-Create a `.env` file in the `Frontend` directory:
+Create a `.env` file in `Frontend` directory:
 
 ```bash
 VITE_API_URL=https://your-backend-domain.com
