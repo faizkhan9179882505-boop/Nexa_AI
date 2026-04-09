@@ -112,7 +112,8 @@ function Sidebar() {
                 </button>
             </div>
             <div className="sign">
-                <p className="brand-name">NexaAI</p>
+                  <span className="logo-text">Nexa</span>
+                    <span className="logo-accent">AI</span>
                 <p className="brand-tagline">Your AI Assistant</p>
             </div>
         </section>
