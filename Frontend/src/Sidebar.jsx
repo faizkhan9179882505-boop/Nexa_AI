@@ -3,12 +3,7 @@ import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext.jsx";
 import { useAuth } from "./contexts/AuthContext.jsx";
 import {v1 as uuidv1} from "uuid";
-import axios from "axios";
-
-// Configure axios base URL
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080'
-});
+import api from "../api.js";
 
 function Sidebar() {
     const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);

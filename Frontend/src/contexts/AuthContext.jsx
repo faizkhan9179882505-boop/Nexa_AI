@@ -1,10 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
-
-// Configure axios base URL
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080'
-});
+import api from '../api.js';
 
 const AuthContext = createContext();
 
@@ -21,14 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Set up axios defaults
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    }
-  }, []);
-
+  
   // Check if user is logged in on mount
   useEffect(() => {
     const checkAuth = async () => {
@@ -41,7 +29,6 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Auth check failed:', error);
         localStorage.removeItem('token');
-        delete api.defaults.headers.common['Authorization'];
       } finally {
         setLoading(false);
       }
@@ -61,8 +48,7 @@ export const AuthProvider = ({ children }) => {
       
       // Store token
       localStorage.setItem('token', token);
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
+            
       setUser(user);
       return { success: true };
     } catch (error) {
@@ -89,8 +75,7 @@ export const AuthProvider = ({ children }) => {
       
       // Store token
       localStorage.setItem('token', token);
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
+            
       setUser(user);
       return { success: true };
     } catch (error) {
@@ -110,8 +95,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       // Clear local storage and axios headers
       localStorage.removeItem('token');
-      delete api.defaults.headers.common['Authorization'];
-      setUser(null);
+            setUser(null);
       setError(null);
     }
   };

@@ -3,13 +3,8 @@ import Chat from "./Chat";
 import { MyContext } from "./MyContext";
 import { useContext, useState } from "react";
 import { ScaleLoader } from "react-spinners";
-import axios from "axios";
 import { useAuth } from "./contexts/AuthContext.jsx";
-
-// Configure axios base URL
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080'
-});
+import api from "../api.js";
 
 function ChatWindow() {
   const {
