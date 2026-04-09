@@ -60,8 +60,21 @@ app.get("/", (req, res) => {
         endpoints: {
             health: "/health",
             auth: "/api/auth",
-            chat: "/api"
+            chat: "/api",
+            apiKeys: "/api-keys/status"
         }
+    });
+});
+
+// API Key status endpoint (for monitoring)
+app.get("/api-keys/status", (req, res) => {
+    const { API_KEYS } = require('./utils/getGemini.js');
+    
+    res.json({
+        totalKeys: API_KEYS.length,
+        configuredKeys: API_KEYS.length,
+        timestamp: new Date().toISOString(),
+        note: "API key rotation and failover is active"
     });
 });
 
