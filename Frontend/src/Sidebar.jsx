@@ -5,13 +5,18 @@ import { useAuth } from "./contexts/AuthContext.jsx";
 import {v1 as uuidv1} from "uuid";
 import axios from "axios";
 
+// Configure axios base URL
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080'
+});
+
 function Sidebar() {
     const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
     const { user, logout } = useAuth();
 
     const getAllThreads = async () => {
         try {
-            const response = await axios.get("/api/thread");
+            const response = await api.get("/api/thread");
             const filteredData = response.data.map(thread => ({threadId: thread.threadId, title: thread.title}));
             //console.log(filteredData);
             setAllThreads(filteredData);
@@ -37,7 +42,7 @@ function Sidebar() {
         setCurrThreadId(newThreadId);
 
         try {
-            const response = await axios.get(`/api/thread/${newThreadId}`);
+            const response = await api.get(`/api/thread/${newThreadId}`);
             const res = response.data;
             console.log(res);
             setPrevChats(res);
@@ -50,7 +55,7 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            const response = await axios.delete(`/api/thread/${threadId}`);
+            const response = await api.delete(`/api/thread/${threadId}`);
             const res = response.data;
             console.log(res);
 

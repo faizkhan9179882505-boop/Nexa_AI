@@ -6,6 +6,11 @@ import { ScaleLoader } from "react-spinners";
 import axios from "axios";
 import { useAuth } from "./contexts/AuthContext.jsx";
 
+// Configure axios base URL
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080'
+});
+
 function ChatWindow() {
   const {
     prompt,
@@ -28,7 +33,7 @@ function ChatWindow() {
     setNewChat(false);
 
     try {
-      const response = await axios.post("/api/chat", {
+      const response = await api.post("/api/chat", {
         message: userMessage,
         threadId: currThreadId,
       });
